@@ -38,7 +38,20 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+
+        if (expr.length % 10 != 0) return NaN;
+        const cloneMorseTable = {};
+        for (let key in MORSE_TABLE) {
+            cloneMorseTable[key] = MORSE_TABLE[key];
+          }
+        cloneMorseTable['**********'] = ' ';
+        let output = '';
+        for (let counter = 0; counter < expr.length; counter += 10) {
+            let litter = expr.slice(counter, counter + 10);
+            let key = litter.split('00').join('').split('10').join('.').split('11').join('-');
+            output += cloneMorseTable[`${key}`];
+        }
+        return output;
 }
 
 module.exports = {
